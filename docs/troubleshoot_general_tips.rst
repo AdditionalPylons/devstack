@@ -255,3 +255,9 @@ possible that the "delegated" consistency mode will be enough to no longer need
 docker-sync, but this feature hasn't been fully implemented yet (as of
 Docker 17.12.0-ce, "delegated" behaves the same as "cached").  There is a
 GitHub issue which explains the `current status of implementing delegated consistency mode`_.
+
+.. _Understanding Git Conceptually: https://www.sbf5.com/~cduan/technical/git/
+.. _Docker Sync: https://github.com/EugenMayer/docker-sync/wiki
+.. _Docker Sync installation instructions: https://github.com/EugenMayer/docker-sync/wiki/1.-Installation
+.. _cached consistency mode for volume mounts: https://docs.docker.com/docker-for-mac/osxfs-caching/
+.. _current status of implementing delegated consistency mode: https://github.com/docker/for-mac/issues/1592

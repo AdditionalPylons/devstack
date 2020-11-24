@@ -470,10 +470,6 @@ As a specific example, if ``OPENEDX_RELEASE`` is set in your environment as ``ju
 .. _Docker Compose: https://docs.docker.com/compose/
 .. _Docker for Mac: https://docs.docker.com/docker-for-mac/
 .. _Docker for Windows: https://docs.docker.com/docker-for-windows/
-.. _Docker Sync: https://github.com/EugenMayer/docker-sync/wiki
-.. _Docker Sync installation instructions: https://github.com/EugenMayer/docker-sync/wiki/1.-Installation
-.. _cached consistency mode for volume mounts: https://docs.docker.com/docker-for-mac/osxfs-caching/
-.. _current status of implementing delegated consistency mode: https://github.com/docker/for-mac/issues/1592
 .. _configuring Docker for Mac: https://docs.docker.com/docker-for-mac/#/advanced
 .. _feature added in Docker 17.05: https://github.com/edx/configuration/pull/3864
 .. _docker-sync: docs/troubleshoot_general_tips.rst#improve-mac-osx-performance-with-docker-sync
@@ -482,4 +478,3 @@ As a specific example, if ``OPENEDX_RELEASE`` is set in your environment as ``ju
     :alt: Travis
 .. _Python virtualenv: http://docs.python-guide.org/en/latest/dev/virtualenvs/#lower-level-virtualenv
 .. _Community: https://open.edx.org/community/connect/
-.. _Understanding Git Conceptually: https://www.sbf5.com/~cduan/technical/git/
