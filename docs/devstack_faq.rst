@@ -1,8 +1,10 @@
 Frequently Asked Questions
 --------------------------
 
+.. contents:: Table of Contents
+
 How do I run the images for a named Open edX release?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------------------
 By default, the steps above will install the devstack using the master branch of all repos. If you want to install a named release instead, follow these steps before pulling the docker images in `step 3`_ of the Getting Started guide:
 
 #. Set the ``OPENEDX_RELEASE`` environment variable to the appropriate image
@@ -19,7 +21,7 @@ master branches and ``latest`` images, unset ``OPENEDX_RELEASE`` or set it to
 an empty string.
 
 How do I run multiple named Open edX releases on same machine?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------------------------------------
 You can have multiple isolated Devstacks provisioned on a single computer now. Follow these directions **after installing at least two devstacks** to switch between them.
 
 #. If you haven't done so, follow the steps in the `Getting Started`_ section, to install the master devstack or any other named release. We recommend that you have at least one devstack on the master branch.
@@ -30,7 +32,7 @@ You can have multiple isolated Devstacks provisioned on a single computer now. F
 The implication of this is that you can switch between isolated Devstack databases by changing the value of the ``OPENEDX_RELEASE`` environment variable.
 
 Switch between your Devstack releases by doing the following:
-*************************************************************
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. Stop the containers by issuing a ``make dev.stop`` for the running release.
 #. Edit the project name in ``options.local.mk`` or set the ``OPENEDX_RELEASE`` environment variable and let the ``COMPOSE_PROJECT_NAME`` be assigned automatically.
@@ -51,22 +53,22 @@ Each instance has an isolated set of databases. This could, for example, be used
 Unfortunately, this **does not** currently support running Devstacks simultaneously, because we hard-code host port numbers all over the place, and two running containers cannot share the same host port.
 
 Questions & Troubleshooting – Multiple Named Open edX Releases on Same Machine
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------------------------------------------
 
 This broke my existing Devstack!
-********************************
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  See if the troubleshooting of this readme can help resolve your broken devstack first, then try posting on the `Open edX forums <https://discuss.openedx.org>`__ to see if you have the same issue as any others. If you think you have found a bug, file a CR ticket.
 
 I’m getting errors related to ports already being used.
-*******************************************************
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Make sure you bring down your devstack before changing the value of COMPOSE_PROJECT_NAME. If you forgot to, change the COMPOSE_PROJECT_NAME back to its original value, run ``make dev.stop``, and then try again.
 
 I have custom scripts/compose files that integrate with or extend Devstack. Will those still work?
-**************************************************************************************************
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 With the default value of COMPOSE_PROJECT_NAME = devstack, they should still work. If you choose a different COMPOSE_PROJECT_NAME, your extensions will likely break, because the names of containers change along with the project name.
 
 How do I switch releases using 'direnv'?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------------
 
 Follow directions in `Switch between your Devstack releases by doing the following:`_ then make the following adjustments.
 
@@ -83,7 +85,7 @@ Make sure that you have setup each Open edX release in separate directories usin
 **NOTE:** Setting of the ``OPENEDX_RELEASE`` should have been handled within the ``.envrc`` file for named releases only and should not be defined for the ``master`` release.
 
 How do I enable environment variables for current directory using 'direnv'?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------------------------------
 We recommend separating the named releases into different directories, for clarity purposes. You can use `direnv <https://direnv.net/>`__ to define different environment variables per directory::
 
     .. code::
@@ -189,12 +191,12 @@ We recommend separating the named releases into different directories, for clari
         layout python-venv
 
 How do I define my own local targets?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------
 
 If you'd like to add some convenience make targets, you can add them to a ``local.mk`` file, ignored by git.
 
 How do I make payments?
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 The ecommerce image comes pre-configured for payments via CyberSource and PayPal. Additionally, the provisioning scripts
 add the demo course (``course-v1:edX+DemoX+Demo_Course``) to the ecommerce catalog. You can initiate a checkout by visiting
@@ -210,14 +212,14 @@ are not checked in development, so put whatever you want in those fields.
 PayPal (same for username and password): devstack@edx.org
 
 How do I develop on an installed Python package?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------------
 
 If you want to modify an installed package – for instance ``edx-enterprise`` or ``completion`` – clone the repository in
 ``~/workspace/src/your-package``. Next, ssh into the appropriate docker container (``make lms-shell``),
 run ``pip install -e /edx/src/your-package``, and restart the service.
 
 How do I upgrade Python packages?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------
 
 Unlike the ``node_modules`` directory, the ``virtualenv`` used to run Python
 code in a Docker container only exists inside that container.  Changes made to
@@ -256,7 +258,7 @@ starts, you have a few options:
   above.
 
 How do I upgrade Node.js packages?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------
 
 JavaScript packages for Node.js are installed into the ``node_modules``
 directory of the local git repository checkout which is synced into the
@@ -266,7 +268,7 @@ usual methods for that service (``npm install``,
 container restarts.
 
 How do I rebuild static assets?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------
 
 Optimized static assets are built for all the Open edX services during
 provisioning, but you may want to rebuild them for a particular service
@@ -284,12 +286,12 @@ To rebuild static assets for all service containers:
    make dev.static
 
 How do I enable comprehensive theming?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------------
 
 Following directions `Changing Themes for an Open edX Site`_ to get started. You can create your theme inside the ``${DEVSTACK_WORKSPACE}/edx-themes`` local directory as this maps to the Docker container ``/edx/app/edx-themes`` location.
 
 Devstack Envs Configuration
-********************************
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Make sure that you enable the following code in ./edx-platform/lms/envs/devstack.py as this will make sure that you have the appropriate Mako template overrides applied for your theme. Forgetting to enable this will not allow your theme template files to be overriden by the platform. See `discuss 3557 <https://discuss.openedx.org/t/enable-comprehensive-theming-devstack-mako-template-overrides-not-working/3557>`__ for details concerning issues with not enabling the following code.
 
 .. code:: python
@@ -315,7 +317,7 @@ Make sure that you enable the following code in ./edx-platform/lms/envs/devstack
    derive_settings(__name__)
 
 How do I connect to the databases from an outside editor?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------------
 
 To connect to the databases from an outside editor (such as MySQLWorkbench),
 first uncomment these lines from ``docker-compose.yml``'s ``mysql`` section:
@@ -338,17 +340,17 @@ running ``make dev.ps`` and looking for a line like this:
 ``edx.devstack.mysql docker-entrypoint.sh mysql ... Up 0.0.0.0:3506→3306/tcp``.
 
 How do I build the service images myself?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------
 
 See the instructions for `building images for devstack`_.
 
 How do I create relational database dumps?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------
 
 See the instructions for `updating relational database dumps`_.
 
 How do I keep my database up to date?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------
 
 To run Django migrations for a particular service, bring up the service and use
 ``make dev.migrate.<service>``. For example:
@@ -374,7 +376,7 @@ cases, it's usually best to first rebase the branch onto master to
 get the missing migrations.
 
 How do I access a database shell?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------
 
 To access a MongoDB shell, run the following commands:
 
@@ -399,7 +401,7 @@ this will put you in a MySQL shell using the E-Commerce database:
   make dev.dbshell.ecommerce
 
 How do I create new migrations?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------
 
 For LMS, log into the LMS shell and run the
 ``makemigrations`` command with the ``devstack_docker`` settings:
@@ -427,7 +429,7 @@ Also, make sure you are aware of the `Django Migration Don'ts`_ as the
 edx-platform is deployed using the red-black method.
 
 Switching branches
-~~~~~~~~~~~~~~~~~~
+------------------
 
 You can usually switch branches on a service's repository without adverse
 effects on a running container for it.  The service in each container is
@@ -446,7 +448,7 @@ If making a patch to a named release, you should pull and use Docker images
 which were tagged for that release.
 
 Changing LMS/Studio settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
 
 LMS and Studio (a.k.a. CMS) read many configuration settings from the container filesystem
 in the following locations:
@@ -466,12 +468,12 @@ After changing settings, you can restart the LMS/Studio process without restarti
    make dev.restart-devserver.studio  # For Studio/CMS
 
 How do I integrate with PyCharm?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------
 
 See the `Pycharm Integration documentation`_.
 
 What is DevPI and how does it affect Devstack?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------------------
 
 LMS and Studio use a devpi container to cache PyPI dependencies, which speeds up several Devstack operations.
 See the `devpi documentation`_.

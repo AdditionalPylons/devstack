@@ -1,8 +1,10 @@
 Troubleshooting: Common Issues
-------------------------------
+==============================
+
+.. contents:: Table of Contents
 
 File ownership change
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 If you notice that the ownership of some (maybe all) files have changed and you
 need to enter your root password when editing a file, you might
@@ -18,7 +20,7 @@ To fix this situation, change the owner back to yourself outside of the containe
   $ sudo chown <user>:<group> -R .
 
 Running LMS commands within a container
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------
 
 Most of the ``paver`` commands require a settings flag. If omitted, the flag defaults to
 ``devstack``. If you run into issues running ``paver`` commands in a docker container, you should append
@@ -29,7 +31,7 @@ the ``devstack_docker`` flag. For example:
   $ paver update_assets --settings=devstack_docker
 
 Resource busy or locked
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 While running ``make static`` within the ecommerce container you could get an error
 saying:
@@ -41,7 +43,7 @@ saying:
 To fix this, remove the directory manually outside of the container and run the command again.
 
 No space left on device
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 If you see the error ``no space left on device``, Docker has run
 out of space in its Docker.qcow2 file.
@@ -74,7 +76,7 @@ If you are still seeing issues, you can try cleaning up dangling volumes.
    docker volume prune -f
 
 No such file or directory
-~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------
 
 While provisioning, some have seen the following error:
 
@@ -100,7 +102,7 @@ Once you get past the issue, you should be able to continue to use sync versions
 of the make targets.
 
 Memory Limit
-~~~~~~~~~~~~
+------------
 
 While provisioning, some have seen the following error:
 
@@ -114,7 +116,7 @@ this error is due to running out of memory.  Try increasing the memory
 allocated to Docker.
 
 Docker is using lots of CPU time when it should be idle
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------------------
 
 On the Mac, this often manifests as the ``hyperkit`` process using a high
 percentage of available CPU resources.  To identify the container(s)
@@ -141,7 +143,7 @@ requirements file or pull new container images that already have the required
 package versions installed.
 
 Missing git branches
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 When trying to check out a branch, you may see an error like this::
 
@@ -166,7 +168,7 @@ commands from within the repository::
     > Switched to branch 'jj/REV-666-implement-evil-feature'.
 
 General git troubleshooting
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
 ``git`` is powerful but complex; you may occasionally find your respository in a
 confusing state. This problem isn't devstack-specific.
@@ -192,13 +194,13 @@ Troubleshooting: Performance
 ----------------------------
 
 Improve Mac OSX Performance using nfs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------
 
 The option to use docker with nfs on mac was added recently. This can potentially increase performance in mac osx. However, this option is still in testing phase. If you find any corrections that should be made, please start a PR with corrections.
 
 
 Improve Mac OSX Performance with docker-sync
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------------------
 
 
 **NOTE:**
@@ -223,7 +225,7 @@ If you are using macOS, please follow the `Docker Sync installation
 instructions`_ before provisioning.
 
 Docker Sync Troubleshooting tips
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------
 Check your version and make sure you are running 0.4.6 or above:
 
 .. code:: sh
@@ -245,7 +247,7 @@ If you are having issues with docker sync, try the following:
     docker-sync clean
 
 Cached Consistency Mode
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 The performance improvements provided by `cached consistency mode for volume
 mounts`_ introduced in Docker CE Edge 17.04 are still not good enough. It's

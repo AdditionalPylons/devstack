@@ -44,11 +44,6 @@ Table of Contents
 * `Usernames and Passwords`_
 * `Service List`_
 * `Useful Commands`_
-* `Frequently Asked Questions`_
-* `Testing and Debugging`_
-* `Troubleshooting: General Tips`_
-* `Troubleshooting: Common Issues`_
-* `Troubleshooting: Performance`_
 * `Known Issues`_
 * `Advanced Configuration Options`_
 
