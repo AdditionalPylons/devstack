@@ -38,7 +38,6 @@ Table of Contents
 
 * `Where to Find Help`_
 * `Prerequisites`_
-* `Using the Latest Images`_
 * `Roadmap`_
 * `Getting Started`_
 * `Usernames and Passwords`_
@@ -97,37 +96,6 @@ However, you may want to run the ``make`` commands from within a Python 3 virtua
 environment, as described in `Getting Started`_. This will keep the Python packages required for Devstack separate from
 the ones installed globally on your system.
 
-Using the Latest Images
------------------------
-
-**NOTE:** LMS is now using MySql 5.7 by default, you have to run  ``make dev.pull.lms``  and  ``make dev.provision.lms``  (more details in `Getting Started`_)
-to fetch latest images and re provision local copies of databases in order for an existing devstack setup to keep working.
-
-By default, these instructions will install the master branch. If you want to install a named release instead (e.g. juniper.master), follow the steps in `How do I run the images for a named Open edX release?`_ before pulling the docker images. You can learn more about named releases in the `official documentation <https://edx.readthedocs.io/projects/edx-developer-docs/en/latest/named_releases.html>`_.
-
-New images for our services are published frequently.  Assuming that you've followed the steps in `Getting Started`_
-below, run the following sequence of commands if you want to use the most up-to-date versions of *all* default devstack images.
-
-.. code:: sh
-
-    make down
-    make dev.pull
-    make dev.up
-
-This will stop and remove any running devstack containers, pull the latest images, and then start all of the devstack containers.
-
-If you wish to pull only images relevant to certain services, you can run ``make dev.pull.<services>``.
-For example, the following only only pulls images of E-Commerce and Credentials, as well as their dependencies (like LMS).
-
-.. code:: sh
-
-    make dev.pull.ecommerce+credentials
-
-To further save time, ``make dev.pull.without-deps.<services>`` pulls the images for the specified service and *nothing else*.
-
-.. code:: sh
-
-    make dev.pull.without-deps.ecommerce+credentials
 
 Roadmap
 -------
