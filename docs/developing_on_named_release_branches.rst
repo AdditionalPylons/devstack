@@ -1,6 +1,11 @@
-How do I run the images for a named Open edX release?
------------------------------------------------------
-By default, the steps above will install the devstack using the master branch of all repos. If you want to install a named release instead, follow these steps before pulling the docker images in `step 3`_ of the Getting Started guide:
+Developing on Open edX named release branches
+=============================================
+
+.. contents:: Table of Contents
+
+To setup your devstack to run on named relase branches, your setup is slightly different from what is listed in Getting started instructions in `README.rst`_. Follow the steps as listed in `getting started`_ section until you get to step 3.
+
+By default, the startup steps in `README.rst`_ will install the devstack using the master branch of all repos. If you want to install a named release instead, follow these steps before pulling the docker images in step 3 of the Getting Started guide:
 
 #. Set the ``OPENEDX_RELEASE`` environment variable to the appropriate image
    tag; "hawthorn.master", "zebrawood.rc1", etc.  Note that unlike a server
@@ -14,6 +19,9 @@ All ``make`` target and ``docker-compose`` calls should now use the correct
 images until you change or unset ``OPENEDX_RELEASE`` again.  To work on the
 master branches and ``latest`` images, unset ``OPENEDX_RELEASE`` or set it to
 an empty string.
+
+.. _README.rst: https://github.com/edx/devstack#getting-started
+.. _getting started: https://github.com/edx/devstack#getting-started
 
 How do I run multiple named Open edX releases on same machine?
 --------------------------------------------------------------
@@ -70,10 +78,13 @@ Follow directions in `Switch between your Devstack releases by doing the followi
 Make sure that you have setup each Open edX release in separate directories using `How do I enable environment variables for current directory using 'direnv'?`_ instructions. Open the next release project in a separate code editor, then activate the ``direnv`` environment variables and virtual environment for the next release by using a terminal shell to traverse to the directory with the corresponding release ``.envrc`` file. You may need to issue a ``direnv allow`` command to enable the ``.envrc`` file.
 
     .. code:: sh
+
         # You should see something like the following after successfully enabling 'direnv' for the Juniper release.
+
         direnv: loading ~/open-edx/devstack.juniper/.envrc
         direnv: export +DEVSTACK_WORKSPACE +OPENEDX_RELEASE +VIRTUAL_ENV ~PATH
         (venv)username@computer-name devstack.juniper %
+
 **NOTE:** Setting of the ``OPENEDX_RELEASE`` should have been handled within the ``.envrc`` file for named releases only and should not be defined for the ``master`` release.
 
 How do I enable environment variables for current directory using 'direnv'?
@@ -93,10 +104,13 @@ We recommend separating the named releases into different directories, for clari
 #. Setup the following configuration to hook `direnv` for local directory environment overrides. There are two examples for BASH or ZSH (Mac OS X) shells.
 
     .. code:: sh
+
         ## ~/.bashrc for BASH shell
+
         ## Hook in `direnv` for local directory environment overrides.
         ## https://direnv.net/docs/hook.html
         eval "$(direnv hook bash)"
+
         # https://github.com/direnv/direnv/wiki/Python#bash
         show_virtual_env() {
         if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
@@ -105,24 +119,33 @@ We recommend separating the named releases into different directories, for clari
         }
         export -f show_virtual_env
         PS1='$(show_virtual_env)'$PS1
+
         # ---------------------------------------------------
+
         ## ~/.zshrc for ZSH shell for Mac OS X.
+
         ## Hook in `direnv` for local directory environment setup.
         ## https://direnv.net/docs/hook.html
         eval "$(direnv hook zsh)"
+
         # https://github.com/direnv/direnv/wiki/Python#zsh
         setopt PROMPT_SUBST
+
         show_virtual_env() {
         if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
             echo "($(basename $VIRTUAL_ENV))"
         fi
         }
         PS1='$(show_virtual_env)'$PS1
+
 #. Setup `layout_python-venv` function to be used in local project directory `.envrc` file.
 
     .. code:: sh
+
         ## ~/.config/direnv/direnvrc
+
         # https://github.com/direnv/direnv/wiki/Python#venv-stdlib-module
+
         realpath() {
             [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
         }
@@ -146,19 +169,26 @@ We recommend separating the named releases into different directories, for clari
                 log_status "no venv found; creating $VIRTUAL_ENV"
                 "$python" -m venv "$VIRTUAL_ENV"
             fi
+
             PATH="${VIRTUAL_ENV}/bin:${PATH}"
             export PATH
         }
+
 #. Example `.envrc` file used in project directory. Need to make sure that each release root has this unique file.
 
     .. code:: sh
+
         # Open edX named release project directory root.
         ## <project-path>/devstack.juniper/.envrc
+
         # https://discuss.openedx.org/t/docker-devstack-multiple-releases-one-machine/1902/10
+
         # This is handled when OPENEDX_RELEASE is set. Leaving this in for manual override.
         # export COMPOSE_PROJECT_NAME=devstack-juniper
+
         export DEVSTACK_WORKSPACE="$(pwd)"
         export OPENEDX_RELEASE=juniper.master
         export VIRTUAL_ENV="$(pwd)/devstack/venv"
+
         # https://github.com/direnv/direnv/wiki/Python#virtualenv
         layout python-venv
