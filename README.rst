@@ -477,20 +477,11 @@ As a specific example, if ``OPENEDX_RELEASE`` is set in your environment as ``ju
 .. _configuring Docker for Mac: https://docs.docker.com/docker-for-mac/#/advanced
 .. _feature added in Docker 17.05: https://github.com/edx/configuration/pull/3864
 .. _edx-e2e-tests README: https://github.com/edx/edx-e2e-tests/#how-to-run-lms-and-studio-tests
-.. _edxops Docker image: https://hub.docker.com/r/edxops/
-.. _Docker Hub: https://hub.docker.com/
-.. _Pycharm Integration documentation: docs/pycharm_integration.rst
-.. _devpi documentation: docs/devpi.rst
 .. _edx-platform testing documentation: https://github.com/edx/edx-platform/blob/master/docs/guides/testing/testing.rst#running-python-unit-tests
-.. _docker-sync: #improve-mac-osx-performance-with-docker-sync
+.. _docker-sync: docs/troubleshoot_general_tips.rst#improve-mac-osx-performance-with-docker-sync
 .. |Build Status| image:: https://travis-ci.org/edx/devstack.svg?branch=master
     :target: https://travis-ci.org/edx/devstack
     :alt: Travis
-.. _How do I build images?: docs/building-images.rst
-.. _Django Migration Don'ts: https://engineering.edx.org/django-migration-donts-f4588fd11b64
 .. _Python virtualenv: http://docs.python-guide.org/en/latest/dev/virtualenvs/#lower-level-virtualenv
 .. _Community: https://open.edx.org/community/connect/
-.. _updating relational database dumps: docs/database-dumps.rst
-.. _building images for devstack: docs/building-images.rst
 .. _Understanding Git Conceptually: https://www.sbf5.com/~cduan/technical/git/
-.. _Changing Themes for an Open edX Site: https://edx.readthedocs.io/projects/edx-installing-configuring-and-running/en/latest/configuration/changing_appearance/theming/index.html

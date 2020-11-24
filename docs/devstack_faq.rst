@@ -291,3 +291,13 @@ What is DevPI and how does it affect Devstack?
 
 LMS and Studio use a devpi container to cache PyPI dependencies, which speeds up several Devstack operations.
 See the `devpi documentation`_.
+
+.. _edxops Docker image: https://hub.docker.com/r/edxops/
+.. _Docker Hub: https://hub.docker.com/
+.. _building images for devstack: docs/building-images.rst
+.. _How do I build images?: docs/building-images.rst
+.. _Changing Themes for an Open edX Site: https://edx.readthedocs.io/projects/edx-installing-configuring-and-running/en/latest/configuration/changing_appearance/theming/index.html
+.. _updating relational database dumps: docs/database-dumps.rst
+.. _Django Migration Don'ts: https://engineering.edx.org/django-migration-donts-f4588fd11b64
+.. _Pycharm Integration documentation: docs/pycharm_integration.rst
+.. _devpi documentation: docs/devpi.rst

@@ -13,7 +13,7 @@ By default, the startup steps in `README.rst`_ will install the devstack using t
 #. Check out the appropriate branch in devstack, e.g. ``git checkout open-release/ironwood.master``
 #. Use ``make dev.checkout`` to check out the correct branch in the local
    checkout of each service repository
-#. Continue with `step 3`_ in the Getting Started guide to pull the correct docker images.
+#. Continue with step 3 in the `getting started` guide to pull the correct docker images.
 
 All ``make`` target and ``docker-compose`` calls should now use the correct
 images until you change or unset ``OPENEDX_RELEASE`` again.  To work on the
